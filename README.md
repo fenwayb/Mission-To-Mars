@@ -16,5 +16,6 @@
 * https://marshemispheres.com/
 
 ## Example
-<p>This is what the website looks like at the time of uploading (at 50% to show the whole page)
+  <p>This is what the website looks like at the time of uploading (at 50% to show the whole page) </p>
+  
 ![background](https://user-images.githubusercontent.com/106105597/187043437-6c26c89f-e5c1-4423-bdca-9c9e2f20646f.png)
