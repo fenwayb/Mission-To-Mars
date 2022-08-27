@@ -4,7 +4,7 @@
 
   # Overview
   
-  <p>For this project we were tasked with Splinter, BeautifulSoup, MongoDB, and Flask to scrape various websites about the planet Mars and create a website to display that information</p>
+  <p>For this project we were tasked with using Splinter, BeautifulSoup, MongoDB, and Flask to scrape various websites about the planet Mars and create a website to display that information</p>
   
   ## Results
 <p>The script successfully scrapes the following websites and displays it on a Flask webpage. The page was then further stylized with additional color using Bootstrap</p>
