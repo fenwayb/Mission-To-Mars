@@ -15,7 +15,8 @@ def scrape_all():
         "news_paragraph": news_p,
         "featured_image": featured_image(browser),
         "facts": mars_facts(),
-        "last_modified": dt.datetime.now()
+        "last_modified": dt.datetime.now(),
+        "hemispheres": mars_image(browser)
     }
     # stop webdriver and return data
     browser.quit()
@@ -88,6 +89,45 @@ def mars_facts():
     df.set_index('description', inplace=True)
 
     return df.to_html()
+
+def mars_image(browser):
+    url = 'https://marshemispheres.com/'
+    browser.visit(url)
+
+    #this finds how many items tags there are to loop through in the following code
+    items_count = []
+    html = browser.html
+    mars_soup = soup(html, 'html.parser')
+    results = mars_soup.find('div', class_='collapsible results')
+    items = len(mars_soup.find_all('div', class_='item'))
+    count = 0
+    while len(items_count) < items:
+        count = count+1
+        items_count.append(count)
+    url = 'https://marshemispheres.com/'
+    browser.visit(url)
+
+    # 2. Create a list to hold the images and titles.
+    hemisphere_image_urls = []
+    img_url_list = []
+    img_title_list = []
+    # 3. Write code to retrieve the image urls and titles for each hemisphere.
+    for x in items_count:
+        browser.find_by_xpath(f'/html/body/div[1]/div[1]/div[2]/section/div/div[2]/div[{x}]/div/a').click()
+        img_url = browser.find_by_xpath('/html/body/div[1]/div/div[2]/div/ul/li[1]/a')["href"]
+        img_url_list.append(img_url)
+        img_title = browser.find_by_xpath('/html/body/div[1]/div/div[3]/h2').text
+        img_title_list.append(img_title)
+        browser.back()
+
+    for item in img_url_list:
+        keys = ["img_url", "title"]
+        x = img_url_list.index(item)
+        values = [img_url_list[x], img_title_list[x]]
+        hemispheres = dict(zip(keys, values))
+        hemisphere_image_urls.append(hemispheres)
+
+    return hemisphere_image_urls
 
 if __name__ == "__main__":
     # If running as script, print scraped data
